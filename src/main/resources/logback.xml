@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds" > 
+<!-- <appender name="RollingFile-Appender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <file>${LOG_PATH}/rollingfile.log</file>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+        <fileNamePattern>${LOG_ARCHIVE}/rollingfile.%d{yyyy-MM-dd}.log</fileNamePattern>
+        <maxHistory>30</maxHistory>
+        <totalSizeCap>1MB</totalSizeCap>
+    </rollingPolicy>
+    <encoder>
+        <pattern>%msg%n</pattern>
+    </encoder>
+</appender> -->
+
+  <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">   
+    <!-- encoder 默认配置为PatternLayoutEncoder -->   
+    <encoder>   
+      <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>   
+    </encoder>   
+  </appender>   
+  <!-- logback为java中的包 -->   
+  <logger name="logback"/>   
+   <!-- 开发Springmvc方便查看错误信息 -->  
+  <logger name="org.springframework.web" level="DEBUG"></logger>
+   
+  <root level="DEBUG">             
+    <appender-ref ref="STDOUT" />   
+  </root>     
+  
+</configuration>
