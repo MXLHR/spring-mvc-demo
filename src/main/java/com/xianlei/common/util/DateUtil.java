@@ -26,9 +26,13 @@ public class DateUtil extends DateUtils {
         dateFormat = format;
     }
     
-    public static void setDateTimeFormatString(String format) {
-        dateTimeFormat = format;
+    public static void setDateFormatString2(String format) {
+    	dateFormat = format;
     }
+    //这个工具类能用吗？by xianleii
+//    public static void setDateTimeFormatString(String format) {
+//        dateTimeFormat = format;
+//    }
     
     /**
      * 将一个毫秒的时间转换为中文时间字符。如传入2000会返回2秒。
