@@ -26,10 +26,7 @@ public class DateUtil extends DateUtils {
         dateFormat = format;
     }
     
-    public static void setDateFormatString2(String format) {
-    	dateFormat = format;
-    }
-    //这个工具类能用吗？by xianleii
+    //这个工具类能用吗？by xianleii 不能修改哈byMXLHR
 //    public static void setDateTimeFormatString(String format) {
 //        dateTimeFormat = format;
 //    }
