@@ -5,6 +5,8 @@ public class User {
 	private String id;
 	private String name;
 	private String sex;
+	
+	
 	public String getId() {
 		return id;
 	}

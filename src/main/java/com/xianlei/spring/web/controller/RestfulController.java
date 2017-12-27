@@ -1,14 +1,15 @@
 package com.xianlei.spring.web.controller;
 
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.xianlei.spring.web.model.User;
 
 
 
-@org.springframework.web.bind.annotation.RestController
+@RestController
 @RequestMapping("/rest")
-public class RestController {
+public class RestfulController {
 
 	@RequestMapping(value="/getUser",produces={"application/json;charset=UTF-8"})
 	public User getUser(User user){

@@ -21,7 +21,7 @@ public class ExceptionHandlerAdvice {
 	}
 	@ModelAttribute//将键值对添加到全局，所有主键的@RequestMapping的方法都可获得此简直对
 	public void addAttributes(Model model){
-		model.addAttribute("base_attr","@RequestMapping的方法都可获得我的值");
+		model.addAttribute("contextPath","/spring-mvc-demo");
 	}
 	
 	@InitBinder//定值WebDataBinder,配置参考API文档

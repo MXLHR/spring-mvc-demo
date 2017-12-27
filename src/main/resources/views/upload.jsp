@@ -7,19 +7,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>Insert title here</title>
 </head>
-<body>
- 	<h2>文件上传页面</h2>
- 	<div class="upload">
- 	<!-- 	<form action="upload" enctype="multipart/form-data" method="post">
- 			<input type="file" name="file"/>
- 			<input type="submit" value="上传"/>
- 		</form> -->
- 		<form name="upload" action="upload" method="post"  enctype="multipart/form-data">
-		<h1>采用流的方式上传文件</h1>
-		<input type="file" name="file">
-		<input type="submit" value="upload"/>
-		</form>
- 	</div>
- 	
+<body>  
+<form action="upload" method="post" enctype="multipart/form-data">  
+<input type="file" name="file" /> <input type="submit" value="Submit" /></form>  
 </body>
 </html>
