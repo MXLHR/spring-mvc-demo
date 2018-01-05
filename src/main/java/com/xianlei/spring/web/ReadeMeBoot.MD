@@ -3,6 +3,8 @@ SpringMVC的基础知识和技术要点。
 #2017.12.20 - 2017.12.26 学习整理
 #阅读书籍《SpringBoot实战：JaveEE开发的颠覆者》
 
+扩展重点一部分：IDEA、Thymeleaf、SSL、WebSocket(广播式和点对点)、spring security
+
 本书涉及的常用技术。
 第一部分 
 1.基于JAVA配置的应用框架 Spring4、SpringMVC、Spring Boot， 扩展技术 Maven、IDEA
@@ -10,7 +12,7 @@ SpringMVC的基础知识和技术要点。
 2.Web开发基础（Servlet容器、http编码、上传文件、json和xml的消息转换、SpringMvc）
 3.Thymeleaf 模板引擎
 4.Tomcat配置、properties配置Tomcat、java代码配置Tomcat、替换Tomcat 为Netty、SSL配置
-5.springBoot + webSocket + spring security  --> 聊天室程序 
+5.springBoot + webSocket + spring security  --> 聊天室程序    （1）广播式WebSocket(订阅发布模式） （2）点对点式
 6.Bootstrap + AngularJS + REST + JqueryUI + Jquery --> 制作导航，实现导航切换页面
 第三部分
 7.SpringBoot的数据访问   Docker、Spring DATA JPA 、Spring DATA Rest 、声明式事务 、 Cache 、 对NoSql (MongoDB、Redis) 的支持
@@ -70,7 +72,46 @@ spring Boot
 
 附录：代码生成Hipster、常用应用属性配置列表
 
+8.1 Docker的安装和使用
+8.2 Spring Data JPA
+	1.什么事Spring DataJPA . 
+		Hibernate使用O/R（对象关系模型）映射技术实现数据访问，O/R映射即将领域模型类和数据库的表进行映射，通过程序操作对象而实现表数据操作的能力，让数据访问操作无须关注数据库相关的技术。
+		Hibernate主要了EJB3.0的JPA规范，JPA即Java Persistence API.JPA是一个基于O/R映射的标准规范（JPA2.1）
+		所谓规范即只定义标准规则如注解、接口，不提供实现，软件提供商可以按照标准规范来实现，而使用者只需要按照规范汇总定义的方式来使用，而不用和软件提供商的实现打交道。JPA主要实现由Hibernate、EclipseLink、OpenJPA等。这也意味着我们只要使用JPA来开发，无论哪一个开发方式都是一样的。
+		SpringDataJPA是SpringData的一个子项目，它通过提供基于JPA的Respository极大地减少了JPA作为数据访问方案的代码量。
+	2.定义数据访问层。   定义一个继承JpaRespository的接口
+	3.配置使用Spring Data JPA  @EnableJpaRespositories
+	4.定义查询方法，定义数据表Person
+	5.自定义Respository的实现
+8.2.2 SpringBoot的支持
+	1.JDBC的自动配置
+	2.对JPA的自动配置
+	3.对Spring Data JPA的自动配置
+	4.Spring Boot 下的Spring Data JPA
+8.2.3 实现
+	1.安装Oracle XE
+	
+8.3 Spring Data REST
+	1.Spring Data Rest 默认是实体类之后加s 来形成路径 。  需要修改默认的要使用如下注
+	2.实际开发中，用AnglularJS 的 $http 进行 get、post、put、delete 操作
+	3.postMan实际使用
+		1）Jquery
+		2）AnglularJS
+		1)查询列表 http://localhost:8080/persons
+		2)查询单一对象 http://localhost:8080/persons/105
+		3)查询方法 findByNameStartsWith  http://localhost:8080/persons/search/nameStartsWith?name=鲜
+		4)分页  http://localhost:8080/persons?page=1&size=2
+		5)排序 http://localhost:8080/persons?sort=age,desc
+		6)保存post  http://localhost:8080/persons   body-raw-json  {"name":"xianlei","address":"chengdu","age":18}
+		6)更新put  http://localhost:8080/persons/21  body-raw-json: {"name":"冯举","address":"贵阳","age":18}
+		7)删除delete http://localhost:8080/persons/105
+	4.定制
+		1)定制REST跟路径  spring.data.rest.base-path= /api
+		2)定制节点路径  @RepositoryRestResource(path = "people")
+8.4 声明式事务
+	
 
+	
 7.1 Spring Boot的Web的开发支持
 	1）boot 提供了spring-boot-starter-web 对Web开发给予支持。
 	2）内部嵌入了Tomcat和SpringMvc的依赖。
@@ -152,14 +193,26 @@ spring Boot
 		starter pom --> spring-boot-starter-websocket
 	3.实战
 		******* springBoot + webSocket + spring security  --> 聊天室程序 *****
+		实战1.订阅发布，广播式
+		实战2.点对点式
+			（1）.广播式不能解决一个我们一个常见的常见，即消息由谁发送、由谁接受的问题。
+			 （2）.演示一个简单的聊天室程序。只有两个用户，互相发送消息给彼此，因需要用户相关的内容，引入简单的Spring Security相关内容。
+		1.添加Spring Security的starter pom
+		2.JAVA配置，继承WevSecurityConfigurerAdpter
+		3.JAVA配置WebSocket类，继承AbstractWebSocketMessageBrokerConfigurer
+		4.演示控制器DianController
+		5.登陆页面login.html
+		6.聊天页面 chat.html
+		7.配置ViewController
+		8.运行，两个用户登陆系统，可以互发消息
 7.7 基于Bootstrap和AngularJS的现代Web应用
-	1.单页面应用（SPA） 指的是一种类似于原生酷虎的软件的更流畅的用户体验的页面。所有的资源都是按需动态加载到页面上的，且不需要服务端控制页面的转向
+	1.单页面应用（SPA） 指的是一种类似于原生客户端软件的更流畅的用户体验的页面。所有的资源(HTML/CSS/JS)都是按需动态加载到页面上的，且【不需要服务端控制页面的转向】
 	2.响应式设计
 		指的是不同的设备电脑平板手机访问不同的页面的时候得到不同的页面视图，适应当前平布的。就算在电脑上，拖动浏览器窗口大小，也能得到合适的视图
 	3.数据导向
 		数据导向是对于页面导向而言的，页面上的数据获得是通过消费后台的REST服务来实现的，而不是通过服务器渲染的动态页面JSP来实现的，一般数据交换使用的格式是JSON
 	
-	
+	1.bootstrap
 	
 	
 
