@@ -17,10 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
-import com.zhph.common.util.DateUtil;
-
-import ch.qos.logback.core.util.DatePatternToRegexUtil;
-
 @Controller
 public class UploadController {
 
