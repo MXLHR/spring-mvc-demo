@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.function.BinaryOperator;
@@ -34,6 +36,43 @@ public class StreamAction {
 			new Dish("prawns", false, 300, Dish.Type.FISH), //吓
 			new Dish("salmon", false, 450, Dish.Type.FISH) //三文鱼
 			);
+	
+	@Test
+	public void test02() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("测试字符串截取。");
+		sb.append("主要分布在");
+//		sb.append(",");
+//		if (sb.lastIndexOf("主要分布在") > -1) {
+//			sb.substring(0, sb.indexOf("主要分布在"));
+//		} else {
+//			sb.append("。");
+//		}
+		int index = sb.indexOf("主要分布在");
+		int indexLast = sb.lastIndexOf("主要分布在");
+		if (sb.lastIndexOf(",") > -1) {
+			sb.replace(sb.length() - 1, sb.length(), "");
+		} else if (sb.lastIndexOf("主要分布在") > -1) {
+			sb.replace(sb.lastIndexOf("主要分布在"), sb.length(), "");
+		} else {
+			sb.append("。");
+		}
+		
+		sb.append("    ");
+		System.out.println(sb.toString());
+		
+	}
+	
+	public void test01() {
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>(){
+			{
+				
+			}
+		};
+		
+		list.stream().mapToInt(e-> Integer.parseInt(e.get("total").toString())).sum();
+		
+	}
 	
 	/**
 	 * Stream API 的使用

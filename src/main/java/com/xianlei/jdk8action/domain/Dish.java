@@ -26,8 +26,11 @@ public class Dish {
 	
 
 	@Override
+//	public String toString() {
+//		return "Dish [name=" + name + ", vegetarian=" + vegetarian + ", calories=" + calories + ", type=" + type + "]";
+//	}
 	public String toString() {
-		return "Dish [name=" + name + ", vegetarian=" + vegetarian + ", calories=" + calories + ", type=" + type + "]";
+		return this.name;
 	}
 
 	public String getName() {
