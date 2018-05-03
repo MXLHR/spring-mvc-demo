@@ -274,9 +274,22 @@ public class StreamAction {
 		/*
 		 * 解决方案，用flatMap
 		 */
-		List<String> result = title.stream().map(w->w.split(""))
+		List<String> result = title.stream()
+				.map(w->w.split(""))
 				.flatMap(Arrays::stream)/** 生成了多个流，扁平化为一个流 */
-				.distinct().collect(toList());
+				.distinct()
+				.collect(toList());
+		
+		/**
+		 * 利用floatmap返回所有数对。
+		 */
+		List<Integer> num1 = Arrays.asList(1,2,3);
+		List<Integer> num2 = Arrays.asList(3,4);
+		List<int[]> pairs = num1.stream()
+				.flatMap(i->num2.stream()
+//						.filter(j->(i+j)%3==0)  增加过滤  ，检查总和能被3整除的数对
+						.map(j->new int[] {i,j}))
+				.collect(toList());
 		
 	}
 	
@@ -303,9 +316,15 @@ public class StreamAction {
 	 * 只要找到一个元素，就返回结果。   与limit一样，不用处理所有的元素。   
 	 * 
 	 */
+	@Test
 	  public void test_5() {
 		  menu.stream().filter(Dish::isVegetarian).findAny() //返回一个Optional<Dish>
 		  			   .ifPresent(d -> System.out.println(d.getName())); //如果值存在就执行代码，否则什么都不做
+		  
+		   //查找第一个元素，找出第一个平方能被3整除的数
+		  List<Integer> nums = Arrays.asList(1,2,3,4,5);
+		  Integer num = nums.stream().map(x->x*x).filter(x->x%3==0).findFirst().get();
+		  System.out.println(num);
 		  
 	  }
 	  //查找地一个元素 findFirst
@@ -340,7 +359,18 @@ public class StreamAction {
 		  //如果Numbers可能为空，需要用到Optional<Integer> 返回值
 		  Optional<Integer> sum5 = numbers.stream().reduce(Integer::sum);
 		  
+		  //count可以计数
+		  long coumt = menu.stream().count();
+		  
+		  int sum6 = numbers.parallelStream().reduce(0, Integer::sum);
+		  
 	  }
+	  
+	  /**
+	   * 交易员和交易
+	   * 
+	   * .sorted(comparing(t.getValue))
+	   */
 	  
 	  /*
 	   * 最大值和最小值

@@ -25,10 +25,13 @@ public class TimeTest {
 		
 		//获取当前日期时间
 		LocalDateTime now = LocalDateTime.now();
-		System.out.println(now);
+		System.out.println("现在的时间是"+now);
 		
 		//将当前日期时间减去两套
-		LocalDateTime minusDays = now.minusDays(2);
+		LocalDateTime minusDays = now.minusDays(1);
+		
+		 System.out.println("今天："+now.getDayOfMonth());
+		 System.out.println("昨天天："+now.minusDays(1).getDayOfMonth());
 		System.out.println(minusDays);
 		
 		//将当前日期的时间加上五天

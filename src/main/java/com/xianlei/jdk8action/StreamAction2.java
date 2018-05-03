@@ -65,6 +65,7 @@ public class StreamAction2 {
 		Map<Currency,List<Transaction>> trans = new HashMap<>();
 //		trans = transactions.stream().collect(Collectors.groupingBy(Transaction:getCurrency()))
 		
+		long howManyDishes2 = menu.stream().collect(Collectors.counting());
 		long howManyDishes = menu.stream().count();
 		
 		/***重点  Collectors.maxBy(Comparator<T>)*/
@@ -92,6 +93,8 @@ public class StreamAction2 {
 		     add("stringN");  
 		 }};  
 		 ArrayList<String> list2 = new ArrayList(Arrays.asList("Tom", "Jerry", "Mike"));  
+		 
+		 /** summarizingInt */
 		/*
 		 * 到目前为止，你已经看到了如何使用收集器来给流中的元素计数，根据属性找到最大值和最小值，以及计算总和 和平均值。
 		 * 不过有时候，你可能想要得到两个或更多这样的结果，而且你希望一次操作就可以完成
@@ -200,7 +203,8 @@ public class StreamAction2 {
 		System.out.println("二级分组(统计)：{}==>"+typesCount.toString());
 		
 		//再进一步， 最高热量分组 maxBy
-		Map<Dish.Type,Optional<Dish>> mostc = menu.stream().collect(Collectors.groupingBy(Dish::getType, Collectors
+		Map<Dish.Type,Optional<Dish>> mostc = menu.stream().collect(Collectors
+				.groupingBy(Dish::getType, Collectors
 				.maxBy(Comparator.comparingInt(Dish::getCalories))));
 		System.out.println("二级分组(maxBy),该类型的最高热量：{}==>"+mostc.toString());
 		//分组操作的Map结果中的每个值上包装的Otional没什么用。所以你想把它去掉。
@@ -212,9 +216,11 @@ public class StreamAction2 {
 		 * 把收集器返回的结果转换为另一种类型，可以使用Collectors.collectingAndThen
 		 * 
 		 */
+		/**collectingAndThen-把收集器返回的结果转换为另一种类型  */
 		Map<Dish.Type,Dish> mostc2 = menu.stream()
 				.collect(groupingBy(Dish::getType, 
-				collectingAndThen(maxBy(comparingInt(Dish::getCalories)),//要转换的收集器（包装后的收集器）
+				collectingAndThen(
+						maxBy(comparingInt(Dish::getCalories)),//要转换的收集器（包装后的收集器）
 						Optional::get//转换成函数
 						)));
 		
@@ -284,7 +290,15 @@ public class StreamAction2 {
 		Map<Boolean,Dish> mostMap =
 				menu.stream().collect(partitioningBy(Dish::isVegetarian,collectingAndThen(
 						maxBy(comparingInt(Dish::getCalories)), Optional::get)));
+		menu.stream().collect(partitioningBy(Dish::isVegetarian,counting()));
+//		menu.stream().collect(partitioningBy(Dish::isVegetarian,partitioningBy()));
 		
+		/**
+		 * 将数字按指数和非质数分区
+		 */
+		/**
+		 * Collector接口
+		 */
 		/*
 		 * 我们已经看到了Collector接口中实现的许多收集器，如toList，groupingBy.
 		 * 这表示你可以为Collector接口提供自己的实现。从而自由地创建自定义归约操作。
