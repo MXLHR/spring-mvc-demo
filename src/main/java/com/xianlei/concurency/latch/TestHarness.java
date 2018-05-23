@@ -13,11 +13,11 @@ public class TestHarness {
 				@Override
 				public void run() {
 					try {
-						startGate.await();
+						startGate.await();//启动门等待
 						try {
 							task.run();
 						} finally {
-							endGate.countDown();
+							endGate.countDown();//结束门完成
 						}
 					} catch (InterruptedException e) {
 						Thread.currentThread().interrupt();
@@ -28,8 +28,8 @@ public class TestHarness {
 		}
 
 		long start = System.nanoTime();
-		startGate.countDown();
-		endGate.await();
+		startGate.countDown();//启动门一起执行 -1
+		endGate.await(); //结束门等待 -0
 		long end = System.nanoTime();
 		return end - start;
 	}

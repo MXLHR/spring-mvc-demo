@@ -6,7 +6,8 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 
 /**
  * JDK1.8 api 内置函数接口

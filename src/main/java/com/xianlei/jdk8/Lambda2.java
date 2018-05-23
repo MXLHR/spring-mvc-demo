@@ -6,7 +6,8 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
+
 
 /*
  * 每一个lambda都能够通过一个特定的接口，与一个给定的类型进行匹配。

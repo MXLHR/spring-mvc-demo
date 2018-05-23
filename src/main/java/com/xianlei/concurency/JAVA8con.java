@@ -96,6 +96,10 @@ public class JAVA8con {
 		
 	}
 	
+	public void test5 () {
+		
+	}
+	
 	
 	
 	
