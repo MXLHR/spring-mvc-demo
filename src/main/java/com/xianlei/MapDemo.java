@@ -106,8 +106,21 @@ public class MapDemo {
 	TreeMap treeMap = new TreeMap();
 	@Test
 	public void putIfAbsent() { //如果值为NULL则put
+		Map<String, Object> nodeMap = new HashMap<String, Object>();
+		nodeMap.putIfAbsent("身份证号", null);
+		
+		System.out.println(nodeMap.toString());
 		map.put("aa", "vaa");
 		map.put("cc", null);
+		map.put("idcard", "511431xxxxxxxx");
+		map.put("focusType", "B3");
+		boolean f = map.getOrDefault("idcard", "").toString().isEmpty();
+		System.out.println(f);
+		if(!f)
+		map.put("身份证号", map.remove("idcard"));
+		map.putIfAbsent("关注类型", map.remove("focusType"));
+		
+		System.out.println(map.toString());
 		Object value = map.putIfAbsent("aa", "baa");
 		Object value2 = map.putIfAbsent("bb", "bbb");
 		Object value3 = map.putIfAbsent("cc", "CCC"); 
